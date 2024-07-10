@@ -1,6 +1,8 @@
-import { existsSync, readFileSync } from 'fs';
+import { createReadStream, existsSync, readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import pWaitFor from 'p-wait-for';
+const dateformat = require('dateformat');
+const CsvReadableStream = require('csv-reader');
 
 export function readFileAsObj(path: string) {
   if (!existsSync(path)) {
@@ -26,6 +28,21 @@ export function readFileAsObj(path: string) {
   }
   return null;
 }
+
+export async function readCsvLine(path: string, online: (row: string[]) => any): Promise<void> {
+  return new Promise(resolve => {
+    const inputStream = createReadStream(path, 'utf-8');
+    inputStream
+      .pipe(new CsvReadableStream({ trim: true, skipHeader: true }))
+      .on('data', (row: string[]) => {
+        online(row);
+      })
+      .on('end', () => {
+        resolve();
+      });
+  });
+}
+
 
 export async function waitFor(mill: number): Promise<void> {
   return new Promise(resolve => {
@@ -74,3 +91,13 @@ export function rankData<T = any>(data: T[], iterArr: any[], getter: (item: T, i
   }
   return result;
 }
+
+export const getLogger = (tag: string) => {
+  const log = (level: string, ...args: any[]) =>
+    console.log(`${dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')} ${level} [${tag}]`, ...args);
+  return {
+    info: (...args: any[]) => log('INFO', ...args),
+    warn: (...args: any[]) => log('WARN', ...args),
+    error: (...args: any[]) => log('ERROR', ...args),
+  };
+};

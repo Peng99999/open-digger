@@ -1,32 +1,45 @@
 name: Ant group
 type: Company
 data:
-  label:
+  labels:
+    - ant_mini_program
     - antchain
     - antd
+    - antv
+    - ceresdb
+    - cnpm
+    - codefuse
+    - couler
+    - dva
     - egg
+    - eosphoros
+    - fury
+    - galacean
+    - hyper_enclave
+    - intelligent_machine_learning
+    - karas
     - kata_container
+    - kcl_lang
+    - kusion_stack
     - macaca
+    - mosn
+    - mpaas
+    - ng_zorro
+    - occlum
     - oceanbase
+    - openspg
+    - secretflow
     - sofastack
+    - sqlflow
+    - tongsuo
+    - trass_stack
+    - tugraph
+    - umi
     - :companies/alibaba/seata
     - :companies/alibaba/opensumi
-  github_org:
-    - 58020396 # org:mosn
-    - 45012756 # org:occlum
-    - 19199542 # org:antvis
-    - 48231449 # org:sql-machine-learning
-    - 33895495 # org:umijs
-    - 45850884 # org:karasjs
-    - 72598982 # org:oasis-engine
-    - 20552239 # org:dvajs
-    - 62416602 # org:mpaas-demo
-    - 1299356  # org:alipay
-    - 103737651 # org:secretflow
-    - 77516929 # org:ceresdb
-    - 104968284 # org:kusionstack
-    - 106951936 # org:traasstack
-    - 102720338 # org:Tongsuo-Project
-    - 107394922 # org:tugraph-db
-    - 37180217 # org:ant-mini-program
-    - 30223759 # org:NG-ZORRO
+  platforms:
+    - name: GitHub
+      type: Code Hosting
+      orgs:
+        - id: 1299356
+          name: alipay
